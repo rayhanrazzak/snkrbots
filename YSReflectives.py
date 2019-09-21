@@ -1,4 +1,4 @@
-
+# start the script once the password page is up
 
 # this is the final version of the yeezysupply bot (works on any v2 350 shoe); just change the variable sit_up to the name of the shoe
 from selenium import webdriver
@@ -42,7 +42,7 @@ creditcardname = "Nihsant Niroola"
 expiration_date = "0321"
 security_code = "616"
 '''
-size = "9"
+size = "5.5"
 
 #size = "M"
 
@@ -62,32 +62,35 @@ driver = webdriver.Chrome(options=chrome_options);
 wait = ui.WebDriverWait(driver,100000)
 
 
-
+nameOfReflective = "CITRIN"
 driver.get("https://yeezysupply.com/")
 
+while(nameOfReflective not in driver.page_source):
+    driver.refresh()
 
-timer = datetime.datetime(2019, 9, 21, 6, 50, 0)
-while datetime.datetime.now() < timer:
-    time.sleep(1)
 
-item_num = 3;
-wait.until(lambda driver: driver.find_element_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/div[1]".format(item_num)))
-itemName = driver.find_element_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/div[1]".format(item_num))
+#item_num = 3;
+#wait.until(lambda driver: driver.find_element_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/div[1]".format(item_num)))
+#itemName = driver.find_element_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/div[1]".format(item_num))
 
-if("YEEZY BOOST 350 V2" in itemName.text):
+#if("YEEZY BOOST 350 V2" in itemName.text):
 #if(itemName.text == "YZY DSRT BT"):
-    el = driver.find_element_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/div[2]/div/select".format(item_num))
-    #el = driver.find_element_by_id("SIZE")
+    #el = driver.find_element_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/div[2]/div/select".format(item_num))
+wait.until(lambda driver: driver.find_element_by_id('SIZE'))
+el = driver.find_element_by_id("SIZE")
 
-    for option in el.find_elements_by_tag_name('option'):
-        if size in option.text:
-            option.click() # select() in earlier versions of webdriver
-            break
-    wait.until(lambda driver: driver.find_element_by_xpath('/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/input[3]'.format(item_num)))
-    driver.find_element_by_xpath('/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/input[3]'.format(item_num)).click()
-    wait.until(lambda driver: driver.find_element_by_name('checkout'))
-    element = driver.find_element_by_name("checkout")
-    driver.execute_script("arguments[0].click();", element)
+for option in el.find_elements_by_tag_name('option'):
+    if size in option.text:
+        option.click() # select() in earlier versions of webdriver
+        break
+#wait.until(lambda driver: driver.find_element_by_xpath('/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/input[3]'.format(item_num)))
+#driver.find_element_by_xpath('/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/input[3]'.format(item_num)).click()
+wait.until(lambda driver: driver.find_element_by_name("add"))
+driver.find_element_by_name("add").click()
+
+wait.until(lambda driver: driver.find_element_by_name('checkout'))
+element = driver.find_element_by_name("checkout")
+driver.execute_script("arguments[0].click();", element)
 
 
 
@@ -132,8 +135,6 @@ wait.until(lambda driver: driver.find_element_by_name('button'))
 driver.find_element_by_name("button").click()
 
 wait.until(lambda driver: driver.find_element_by_xpath('/html/body/div[1]/div/div[1]/div[2]/div[2]/div/form/div[1]/div/div[2]/div/div[3]/div[3]/div[1]/div/div[1]/iframe'))
-dif_address = "true"
-
 
 creditnum=driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div/form/div[1]/div/div[2]/div/div[3]/div[3]/div[1]/div/div[1]/iframe")
 driver.switch_to.frame(creditnum)
@@ -147,7 +148,8 @@ driver.execute_script('document.getElementById("name").value="{}";'.format(credi
 driver.switch_to.default_content()
 expirframe = driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div/form/div[1]/div/div[2]/div/div[3]/div[3]/div[3]/div/div/iframe")
 driver.switch_to.frame(expirframe)
-driver.execute_script('document.getElementById("expiry").value="{}";'.format(expiration_date))
+#driver.execute_script('document.getElementById("expiry").value="{}";'.format(expiration_date))
+driver.find_element_by_id("expiry").send_keys(expiration_date)
 
 driver.switch_to.default_content()
 securityframe = driver.find_element_by_xpath("/html/body/div[1]/div/div[1]/div[2]/div[2]/div/form/div[1]/div/div[2]/div/div[3]/div[3]/div[4]/div/div[1]/iframe")
