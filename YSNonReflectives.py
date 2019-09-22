@@ -58,7 +58,7 @@ chrome_options.add_experimental_option("excludeSwitches", ['enable-automation'])
 driver = webdriver.Chrome(options=chrome_options);
 wait = ui.WebDriverWait(driver,100000)
 driver.get("https://yeezysupply.com/")
-item_num = 4; #number of item in the website
+item_num = 1 #number of item in the website
 
 # need to reload until SIZE element is showing
 checkIfSizeElem = driver.find_elements_by_xpath("/html/body/div[1]/main/div[2]/div/div[{}]/div/div[2]/form/div[2]/div/select".format(item_num))
