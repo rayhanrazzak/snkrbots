@@ -40,7 +40,7 @@ creditcardname = "Nihsant Niroola"
 expiration_date = "0321"
 security_code = "616"
 '''
-size = "9" #size of shoe
+size = "5.5" #size of shoe
 
 #size = "M"
 
