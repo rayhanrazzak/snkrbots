@@ -7,4 +7,4 @@
 * Successfully used for Yeezy non-reflective cloud whites (September 21). 
 
 ### Pending:
-* Yeezy "Zebra" v2 (November 16)
+* Yeezy 380 "Alien" (November 16)
